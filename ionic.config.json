@@ -1,0 +1,8 @@
+{
+  "name": "tdp-auth-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "d49a1a77"
+}
