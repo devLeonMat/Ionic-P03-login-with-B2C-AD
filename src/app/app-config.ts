@@ -38,7 +38,7 @@ export const b2cPolicies = {
  */
 export const apiConfig: { b2cScopes: string[]; webApi: string } = {
     b2cScopes: ['https://tdppocb2c.onmicrosoft.com/telefonica/user_impersonation'],
-    webApi: 'http://localhost:4520/'
+    webApi: 'http://localhost:4205/'
 };
 // #endregion
 
@@ -52,7 +52,8 @@ export const msalConfig: Configuration = {
     auth: {
         clientId: '247617a1-7fd2-46e0-beda-bb1955504200',
         authority: 'https://tdppocb2c.b2clogin.com/tdppocb2c.onmicrosoft.com/B2C_1A_signup_signin',
-        redirectUri: 'http://localhost:4205/',
+        redirectUri: 'ionib2c://tabs/tab1',
+        // redirectUri: 'http://localhost:4205/',
         postLogoutRedirectUri: 'http://localhost:4205/',
         navigateToLoginRequestUrl: true,
         validateAuthority: false,
@@ -62,6 +63,11 @@ export const msalConfig: Configuration = {
         storeAuthStateInCookie: isIE, // Set this to 'true' to save cache in cookies to address trusted zones limitations in IE
     },
 };
+/**
+ * para android sería http://localhost/
+ y para ios sería ionic://localhost/
+ */
+
 
 /**
  * Scopes you enter here will be consented once you authenticate. For a full list of available authentication parameters,

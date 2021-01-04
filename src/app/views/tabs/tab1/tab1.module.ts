@@ -8,6 +8,7 @@ import {Tab1Page} from './tab1.page';
 import {Tab1PageRoutingModule} from './tab1-routing.module';
 import {AppModule} from "../../../app.module";
 import {HeaderComponent} from "../../../components/header/header.component";
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   imports: [
@@ -18,6 +19,9 @@ import {HeaderComponent} from "../../../components/header/header.component";
   ],
   exports: [
     HeaderComponent
+  ],
+  providers:[
+    InAppBrowser
   ],
   declarations: [Tab1Page, HeaderComponent]
 })

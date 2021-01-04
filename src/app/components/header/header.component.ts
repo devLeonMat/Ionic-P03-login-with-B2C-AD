@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {BroadcastService, MsalService} from "@azure/msal-angular";
 import {Logger, CryptoUtils} from 'msal';
 import {isIE, b2cPolicies} from '../../app-config';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-header',
@@ -16,7 +17,9 @@ export class HeaderComponent implements OnInit {
     loggedIn = false;
     isIframe = false;
 
-    constructor(private broadcastService: BroadcastService, private authService: MsalService) {
+    constructor(private broadcastService: BroadcastService,
+                private authService: MsalService,
+                private iab: InAppBrowser) {
     }
 
     ngOnInit() {
@@ -75,11 +78,12 @@ export class HeaderComponent implements OnInit {
 
     checkAccount() {
         this.loggedIn = !!this.authService.getAccount();
+
     }
 
     login() {
         // if (isIE) {
-        this.authService.loginRedirect();
+            this.authService.loginRedirect();
         // } else {
         //     this.authService.loginPopup();
         // }
