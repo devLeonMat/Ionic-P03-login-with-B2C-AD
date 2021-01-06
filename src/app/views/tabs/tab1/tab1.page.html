@@ -8,12 +8,24 @@
     </ion-header>
 
     <ion-card>
-        <ion-card-header>
-            <ion-card-subtitle>Destination</ion-card-subtitle>
-            <ion-card-title>Madison, WI</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-            Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-        </ion-card-content>
+        <div *ngIf="!isLoginCorrect">
+            <ion-card-header>
+                <ion-card-subtitle>Destination</ion-card-subtitle>
+                <ion-card-title>Madison, WI</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the
+                Wisconsin Territory in 1836.
+            </ion-card-content>
+        </div>
+        <div *ngIf="isLoginCorrect">
+            <ion-card-header>
+                <ion-card-subtitle>Hola {{userModel.username}}</ion-card-subtitle>
+                <ion-card-title>{{userModel.correo}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                {{userModel|json}}l
+            </ion-card-content>
+        </div>
     </ion-card>
 </ion-content>

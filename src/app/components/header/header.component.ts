@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "../../services/authentication.service";
 import {Subscription} from "rxjs";
+
 import {BroadcastService, MsalService} from "@azure/msal-angular";
+
 import {Logger, CryptoUtils} from 'msal';
-import {isIE, b2cPolicies} from '../../app-config';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-header',
@@ -18,8 +17,7 @@ export class HeaderComponent implements OnInit {
     isIframe = false;
 
     constructor(private broadcastService: BroadcastService,
-                private authService: MsalService,
-                private iab: InAppBrowser) {
+                private authService: MsalService,) {
     }
 
     ngOnInit() {
@@ -31,23 +29,15 @@ export class HeaderComponent implements OnInit {
 
         // event listeners for authentication status
         loginSuccessSubscription = this.broadcastService.subscribe('msal:loginSuccess', (success) => {
-
-            // We need to reject id tokens that were not issued with the default sign-in policy.
-            // "acr" claim in the token tells us what policy is used (NOTE: for new policies (v2.0), use "tfp" instead of "acr")
-            // To learn more about b2c tokens, visit https://docs.microsoft.com/en-us/azure/active-directory-b2c/tokens-overview
-            //   if (success.idToken.claims.acr === b2cPolicies.names.resetPassword) {
-            //     window.alert('Password has been reset successfully. \nPlease sign-in with your new password');
-            //     return this.authService.logout();
-            //   }
-
             console.log('login succeeded. id token acquired at: ' + new Date().toString());
+            alert('login succeeded. id token acquired at: ' + success);
             console.log(success);
-
             this.checkAccount();
         });
 
         loginFailureSubscription = this.broadcastService.subscribe('msal:loginFailure', (error) => {
             console.log('login failed');
+            alert('login failed' + error);
             console.log(error);
         });
 
@@ -82,11 +72,8 @@ export class HeaderComponent implements OnInit {
     }
 
     login() {
-        // if (isIE) {
-            this.authService.loginRedirect();
-        // } else {
-        //     this.authService.loginPopup();
-        // }
+        // MSAL method of call to redirect
+        this.authService.loginRedirect();
     }
 
     logout() {
