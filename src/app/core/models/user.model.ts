@@ -25,3 +25,19 @@ export class UserModel {
     not_before: number;
     tid: string;
 }
+
+export class User {
+    sessionId = '';
+    name = '';
+    email = '';
+    numtel = '';
+    companyInfoCompleted = false;
+    emailFlag = false;
+    loginResponse: LoginResponse;
+}
+
+export class LoginResponse {
+    accessToken = '';
+    tokenType = '';
+    username = '';
+}

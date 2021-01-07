@@ -6,4 +6,16 @@
         </ion-toolbar>
     </ion-header>
 
+    <ion-button (click)="getInfo()"
+                class="aad-login-button"
+                color="dark">
+        Info Speakers
+    </ion-button>
+    <div *ngIf="response.length>1">
+        <ion-card-header>
+            <ion-card-subtitle>{{response|json}}</ion-card-subtitle>
+        </ion-card-header>
+    </div>
+
+
 </ion-content>

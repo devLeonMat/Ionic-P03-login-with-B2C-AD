@@ -1,8 +1,10 @@
 import {Component, NgZone, ViewChild} from '@angular/core';
 import {NavController} from "@ionic/angular";
 import {MsalService} from "@azure/msal-angular";
-import {UserModel} from "../../../models/user.model";
+import {UserModel} from "../../../core/models/user.model";
 import jwt_decode from "jwt-decode";
+import {AuthenticationService} from "../../../core/services/authentication.service";
+import {JwtService} from "../../../core/services/jwt.service";
 
 // (window as any).handleOpenURL = (url: string) => {
 //     (window as any).handleOpenURL_LastURL = url;
@@ -15,13 +17,15 @@ import jwt_decode from "jwt-decode";
 })
 export class Tab1Page {
 
-    isLoginCorrect = false;
     userModel: UserModel = new UserModel();
 
     @ViewChild("rootNav")
     private navCtrl: NavController;
 
-    constructor(private ngZone: NgZone, private authService: MsalService) {
+    constructor(private ngZone: NgZone,
+                private authService: MsalService,
+                public authenticationService: AuthenticationService,
+                private jwtService: JwtService) {
         (window as any).handleOpenURL = (url: string) => {
             // this context is called outside of angular zone!
             setTimeout(() => {
@@ -46,12 +50,11 @@ export class Tab1Page {
     }
 
     private handleOpenUrl(url: string) {
-        this.isLoginCorrect = true;
+        this.authenticationService.isLoginCorrect = true;
         // custom url parsing, etc...
         console.log(url);
-        localStorage.setItem('token-complete', url);
-        localStorage.setItem('token', url.split('=')[3]);
-        this.userModel = jwt_decode(localStorage.getItem('token'));
+        this.jwtService.setToken(url.split('=')[3]);
+        this.userModel = jwt_decode(this.jwtService.getToken())
         // navigate to page with reactive forms
         // this.navCtrl.push(MyReactiveFormsPage, { param: "my param" });
     }

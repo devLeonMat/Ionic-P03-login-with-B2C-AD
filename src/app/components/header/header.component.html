@@ -1,9 +1,17 @@
 <ion-toolbar>
     <ion-buttons slot="secondary">
-        <ion-button color="secondary" (click)="login()">
-            <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-            login
-        </ion-button>
+        <div *ngIf="!authenticationService.isLoginCorrect">
+            <ion-button color="secondary" (click)="login()">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+                login
+            </ion-button>
+        </div>
+        <div *ngIf="authenticationService.isLoginCorrect">
+            <ion-button color="secondary" (click)="logout()">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+                logout
+            </ion-button>
+        </div>
     </ion-buttons>
     <ion-buttons slot="primary">
         <ion-button color="danger">

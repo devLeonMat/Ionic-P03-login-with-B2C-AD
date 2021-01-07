@@ -8,7 +8,7 @@
     </ion-header>
 
     <ion-card>
-        <div *ngIf="!isLoginCorrect">
+        <div *ngIf="!authenticationService.isLoginCorrect">
             <ion-card-header>
                 <ion-card-subtitle>Destination</ion-card-subtitle>
                 <ion-card-title>Madison, WI</ion-card-title>
@@ -18,13 +18,13 @@
                 Wisconsin Territory in 1836.
             </ion-card-content>
         </div>
-        <div *ngIf="isLoginCorrect">
+        <div *ngIf="authenticationService.isLoginCorrect">
             <ion-card-header>
                 <ion-card-subtitle>Hola {{userModel.username}}</ion-card-subtitle>
                 <ion-card-title>{{userModel.correo}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
-                {{userModel|json}}l
+                {{userModel|json}}
             </ion-card-content>
         </div>
     </ion-card>

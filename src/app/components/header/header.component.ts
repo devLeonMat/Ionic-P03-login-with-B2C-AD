@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {BroadcastService, MsalService} from "@azure/msal-angular";
 
 import {Logger, CryptoUtils} from 'msal';
+import {AuthenticationService} from "../../core/services/authentication.service";
 
 @Component({
     selector: 'app-header',
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit {
     isIframe = false;
 
     constructor(private broadcastService: BroadcastService,
-                private authService: MsalService,) {
+                private authService: MsalService,
+                public authenticationService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -68,7 +70,6 @@ export class HeaderComponent implements OnInit {
 
     checkAccount() {
         this.loggedIn = !!this.authService.getAccount();
-
     }
 
     login() {
@@ -77,7 +78,9 @@ export class HeaderComponent implements OnInit {
     }
 
     logout() {
+        this.authenticationService.isLoginCorrect = false;
         this.authService.logout();
+        localStorage.clear();
     }
 
 }
