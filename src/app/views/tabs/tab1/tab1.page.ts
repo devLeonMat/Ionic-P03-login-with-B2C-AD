@@ -4,7 +4,6 @@ import {MsalService} from "@azure/msal-angular";
 import {UserModel} from "../../../core/models/user.model";
 import jwt_decode from "jwt-decode";
 import {AuthenticationService} from "../../../core/services/authentication.service";
-import {JwtService} from "../../../core/services/jwt.service";
 
 // (window as any).handleOpenURL = (url: string) => {
 //     (window as any).handleOpenURL_LastURL = url;
@@ -24,8 +23,7 @@ export class Tab1Page {
 
     constructor(private ngZone: NgZone,
                 private authService: MsalService,
-                public authenticationService: AuthenticationService,
-                private jwtService: JwtService) {
+                public authenticationService: AuthenticationService) {
         (window as any).handleOpenURL = (url: string) => {
             // this context is called outside of angular zone!
             setTimeout(() => {
@@ -53,8 +51,8 @@ export class Tab1Page {
         this.authenticationService.isLoginCorrect = true;
         // custom url parsing, etc...
         console.log(url);
-        this.jwtService.setToken(url.split('=')[3]);
-        this.userModel = jwt_decode(this.jwtService.getToken())
+        localStorage.setItem('token', url.split('=')[3]);
+        this.userModel = jwt_decode(url.split('=')[3])
         // navigate to page with reactive forms
         // this.navCtrl.push(MyReactiveFormsPage, { param: "my param" });
     }

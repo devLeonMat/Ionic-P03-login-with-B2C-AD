@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {SpeakersService} from "../../../core/services/speakers.service";
+import {SpeakersModel} from "../../../core/models/speakers.model";
 
 @Component({
     selector: 'app-tab2',
@@ -8,7 +9,8 @@ import {SpeakersService} from "../../../core/services/speakers.service";
 })
 export class Tab2Page {
 
-    response = '';
+    speakers: SpeakersModel = new SpeakersModel();
+    isCorrect = false;
 
     constructor(
         private speakerService: SpeakersService
@@ -18,7 +20,8 @@ export class Tab2Page {
     getInfo() {
         this.speakerService.getSpeakers().subscribe(value => {
             console.log(value);
-            this.response = value;
+            this.speakers = value;
+            this.isCorrect = true;
             localStorage.setItem('Speakers-correct', JSON.stringify(value));
         }, error => {
             console.log(error);

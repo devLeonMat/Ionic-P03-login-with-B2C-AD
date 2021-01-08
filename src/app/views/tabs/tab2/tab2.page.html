@@ -11,9 +11,9 @@
                 color="dark">
         Info Speakers
     </ion-button>
-    <div *ngIf="response.length>1">
+    <div *ngIf="isCorrect">
         <ion-card-header>
-            <ion-card-subtitle>{{response|json}}</ion-card-subtitle>
+            <ion-card-subtitle>{{speakers|json}}</ion-card-subtitle>
         </ion-card-header>
     </div>
 

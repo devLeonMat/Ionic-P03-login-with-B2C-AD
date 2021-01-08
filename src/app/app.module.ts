@@ -10,7 +10,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {msalConfig, msalAngularConfig} from './app-config';
 import {Configuration} from 'msal';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {
     MsalModule,
     MsalInterceptor,
@@ -37,6 +37,7 @@ function MSALAngularConfigFactory(): MsalAngularConfiguration {
         BrowserModule,
         IonicModule.forRoot(),
         MsalModule,
+        HttpClientModule,
         AppRoutingModule],
     providers: [
         {
