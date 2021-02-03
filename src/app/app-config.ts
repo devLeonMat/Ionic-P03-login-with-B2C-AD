@@ -1,5 +1,6 @@
 import {Configuration} from 'msal';
 import {MsalAngularConfiguration} from '@azure/msal-angular';
+import {AuthenticationParameters} from "msal";
 
 // this checks if the app is running on IE
 export const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -36,9 +37,15 @@ export const b2cPolicies = {
  * Enter here the coordinates of your Web API and scopes for access token request
  * The current application coordinates were pre-registered in a B2C tenant.
  */
-export const apiConfig: { b2cScopes: string[]; webApi: string } = {
-    b2cScopes: ['https://tdppocb2c.onmicrosoft.com/telefonica/user_impersonation'],
+export const apiConfig: { b2cScopes: Array<string>; webApi: string } = {
+    b2cScopes: ['https://tdppocb2c.onmicrosoft.com/api1/demo.write',
+        'https://tdppocb2c.onmicrosoft.com/api1/demo.read'],
     webApi: 'http://localhost:4205/'
+};
+
+export const apiConfigs: AuthenticationParameters = {
+    scopes: ['https://tdppocb2c.onmicrosoft.com/api1/demo.write',
+        'https://tdppocb2c.onmicrosoft.com/api1/demo.read']
 };
 // #endregion
 

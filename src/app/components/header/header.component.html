@@ -6,6 +6,12 @@
                 login
             </ion-button>
         </div>
+        <div>
+            <ion-button color="secondary" (click)="silentLogin()">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+                refresh
+            </ion-button>
+        </div>
         <div *ngIf="authenticationService.isLoginCorrect">
             <ion-button color="secondary" (click)="logout()">
                 <ion-icon slot="icon-only" name="person-circle"></ion-icon>

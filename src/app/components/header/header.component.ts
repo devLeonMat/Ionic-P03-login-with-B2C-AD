@@ -5,6 +5,7 @@ import {BroadcastService, MsalService} from "@azure/msal-angular";
 
 import {Logger, CryptoUtils} from 'msal';
 import {AuthenticationService} from "../../core/services/authentication.service";
+import {apiConfig, apiConfigs} from "../../app-config";
 
 @Component({
     selector: 'app-header',
@@ -75,6 +76,28 @@ export class HeaderComponent implements OnInit {
     login() {
         // MSAL method of call to redirect
         this.authService.loginRedirect();
+        setTimeout(() => {
+            this.silentLogin();
+        }, 5000);
+    }
+
+
+    silentLogin() {
+
+        var _this = this; // JS this :(
+        // var tokenRequest = {
+        //     //https://tdppocb2c.b2clogin.com/tdppocb2c.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_signup_signin&client_id=34f924b4-e26d-4621-9ceb-b0cbd503183b&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login
+        //     scopes: ['https://tdppocb2c.b2clogin.com/tdppocb2c.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_signup_signin&client_id=34f924b4-e26d-4621-9ceb-b0cbd503183b&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login']
+        // };
+        // _this.authService.authority = "https://b2cprod.b2clogin.com/te/b2cprod.onmicrosoft.com/B2C_1A_MFA_phone_or_email_SUSI";
+        _this.authService.acquireTokenSilent(apiConfigs).then(
+            function (token: any) {
+                var accesstoken = token.accessToken;
+                console.log(accesstoken);
+                // localStorage.setItem('accesstoken', accesstoken);
+            }, function (error: any) {
+                alert(error);
+            });
     }
 
     logout() {

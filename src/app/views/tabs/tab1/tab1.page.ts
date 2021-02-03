@@ -51,7 +51,7 @@ export class Tab1Page {
         this.authenticationService.isLoginCorrect = true;
         // custom url parsing, etc...
         console.log(url);
-        localStorage.setItem('token', url.split('=')[3]);
+        // localStorage.setItem('token', url.split('=')[3]);
         this.userModel = jwt_decode(url.split('=')[3])
         // navigate to page with reactive forms
         // this.navCtrl.push(MyReactiveFormsPage, { param: "my param" });
